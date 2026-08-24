@@ -1,22 +1,196 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Velal</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Wanku's Kart — by Shivankush</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <h1>Welcome to Velal</h1>
+    <!-- HEADER -->
 
-    <p>This is my first website.</p>
+    <header>
 
-    <button onclick="sayHello()">Click Me</button>
+        <div class="logo">
+            Wanku's Kart
+            <span>by Shivankush</span>
+        </div>
 
-    <script>
-        function sayHello() {
-            alert("Hello from Velal!");
-        }
-    </script>
+        <div class="system-status">
+            <span class="status-dot"></span>
+            <span id="systemStatusText">SYSTEM ONLINE</span>
+        </div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#lab">Coffee Lab</a>
+            <a href="#creations">Creations</a>
+            <a href="#journal">Journal</a>
+            <a href="#wankus-kart">Wanku's Kart</a>
+            <a href="#about">About</a>
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <!-- HERO -->
+
+        <section id="home" class="hero">
+
+            <p class="eyebrow">
+                COFFEE • EXPERIMENTS • CREATIONS
+            </p>
+
+            <h1>
+                Coffee,<br>
+                experimented.
+            </h1>
+
+            <p class="hero-text">
+                A space where I experiment with coffee,
+                create new ideas and document the journey.
+            </p>
+
+            <button id="exploreButton">
+                Explore the Coffee Lab
+            </button>
+
+        </section>
+
+
+        <!-- COFFEE LAB -->
+
+        <section id="lab" class="section">
+
+            <p class="eyebrow">
+                THE COFFEE LAB
+            </p>
+
+            <h2>
+                Where coffee becomes an experiment.
+            </h2>
+
+            <p>
+                Beans, grind size, dose, temperature,
+                extraction and everything in between.
+            </p>
+
+            <button id="labButton">
+                Enter the Lab
+            </button>
+
+            <div id="labMessage"></div>
+
+        </section>
+
+
+        <!-- CREATIONS -->
+
+        <section id="creations" class="section">
+
+            <p class="eyebrow">
+                CREATIONS
+            </p>
+
+            <h2>
+                Things I've brewed.
+            </h2>
+
+            <p>
+                Coffee ideas, recipes and experiments
+                that turned into something worth drinking.
+            </p>
+
+        </section>
+
+
+        <!-- JOURNAL -->
+
+        <section id="journal" class="section">
+
+            <p class="eyebrow">
+                COFFEE JOURNAL
+            </p>
+
+            <h2>
+                Notes from the journey.
+            </h2>
+
+            <p>
+                What worked. What didn't.
+                And what I'm trying next.
+            </p>
+
+        </section>
+
+
+        <!-- WANKU'S KART -->
+
+        <section id="wankus-kart" class="section kart">
+
+            <p class="eyebrow">
+                COMING SOON
+            </p>
+
+            <h2>
+                Wanku's Kart ☕
+            </h2>
+
+            <p>
+                One day, these experiments leave the kitchen
+                and make their way to a coffee cart.
+            </p>
+
+        </section>
+
+
+        <!-- ABOUT -->
+
+        <section id="about" class="section">
+
+            <p class="eyebrow">
+                THE PERSON BEHIND THE COFFEE
+            </p>
+
+            <h2>
+                Hi, I'm Shivankush.
+            </h2>
+
+            <p>
+                Wanku's Kart is my little corner of the internet
+                where I explore coffee, experiment with ideas
+                and slowly build towards something bigger.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            Wanku's Kart — by Shivankush
+        </p>
+
+        <p>
+            Brewing something interesting.
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
 
 </body>
+
 </html>
