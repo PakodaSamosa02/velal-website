@@ -1,7 +1,7 @@
-/* =========================================
-   WANKU'S KART
-   FUTURISTIC COFFEE LAB
-   ========================================= */
+/* =========================================================
+   WANKU'S KART — V2
+   QUIRKY / ARTISTIC / PERSONAL COFFEE JOURNEY
+   ========================================================= */
 
 * {
     margin: 0;
@@ -14,267 +14,393 @@ html {
 }
 
 body {
-    background: #090a0b;
-    color: #e9e4d9;
+    background: #eee3d0;
+    color: #211710;
     font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.6;
+    line-height: 1.5;
     overflow-x: hidden;
 }
 
-/* =========================================
-   BACKGROUND GRID
-   ========================================= */
+a {
+    color: inherit;
+}
 
-body::before {
+
+/* =========================================================
+   PAPER TEXTURE
+   ========================================================= */
+
+#main-site {
+    position: relative;
+    overflow: hidden;
+    background: #eee3d0;
+
+    opacity: 0;
+    transform: translateY(30px);
+
+    transition:
+        opacity 1.3s ease,
+        transform 1.3s cubic-bezier(.2,.8,.2,1);
+}
+
+#main-site.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#main-site::before {
     content: "";
+
     position: fixed;
     inset: 0;
 
-    background-image:
-        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-
-    background-size: 50px 50px;
-
-    pointer-events: none;
-    z-index: -2;
-}
-
-body::after {
-    content: "";
-
-    position: fixed;
-
-    width: 600px;
-    height: 600px;
-
-    top: -250px;
-    right: -200px;
-
-    background: rgba(176, 105, 45, 0.08);
-
-    filter: blur(120px);
-
-    border-radius: 50%;
-
-    pointer-events: none;
-    z-index: -1;
-}
-
-/* =========================================
-   HEADER
-   ========================================= */
-
-header {
-    position: sticky;
-    top: 0;
-
     z-index: 100;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    pointer-events: none;
 
-    padding: 20px 6%;
+    opacity: 0.035;
 
-    background: rgba(9, 10, 11, 0.88);
+    background-image:
+        radial-gradient(
+            rgba(40, 25, 15, 0.8) 0.6px,
+            transparent 0.6px
+        );
 
-    backdrop-filter: blur(14px);
+    background-size: 5px 5px;
 
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    mix-blend-mode: multiply;
 }
 
-.logo {
+
+/* =========================================================
+   SCROLL REVEALS
+   ========================================================= */
+
+.scroll-reveal {
+    opacity: 0;
+
+    transform:
+        translateY(45px)
+        rotate(1deg);
+
+    transition:
+        opacity 1s ease,
+        transform 1s cubic-bezier(.2,.8,.2,1);
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+
+    transform:
+        translateY(0)
+        rotate(0deg);
+}
+
+
+/* Slightly different timing for cards */
+
+.journal-card:nth-child(1) {
+    transition-delay: 0.05s;
+}
+
+.journal-card:nth-child(2) {
+    transition-delay: 0.15s;
+}
+
+.journal-card:nth-child(3) {
+    transition-delay: 0.25s;
+}
+
+.notebook-scrap {
+    transition:
+        opacity 1s ease,
+        transform 1s cubic-bezier(.2,.8,.2,1);
+}
+
+.scrap-one.scroll-reveal {
+    transform:
+        translateY(30px)
+        rotate(10deg);
+}
+
+.scrap-one.scroll-reveal.revealed {
+    transform:
+        translateY(0)
+        rotate(7deg);
+}
+
+.scrap-two.scroll-reveal {
+    transform:
+        translateY(30px)
+        rotate(-10deg);
+}
+
+.scrap-two.scroll-reveal.revealed {
+    transform:
+        translateY(0)
+        rotate(-6deg);
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.site-header {
+    position: relative;
+    z-index: 20;
+
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 28px 6vw;
+
+    border-bottom:
+        1px solid rgba(33, 23, 16, 0.16);
+
+    background:
+        rgba(238, 227, 208, 0.86);
+
+    backdrop-filter: blur(8px);
+}
+
+.site-logo {
+    display: flex;
+    flex-direction: column;
+
+    text-decoration: none;
+
     font-family: Georgia, serif;
 
     font-size: 22px;
+    line-height: 0.9;
 
-    letter-spacing: 3px;
+    letter-spacing: -0.5px;
+
+    cursor: pointer;
+}
+
+.site-logo span {
+    margin-top: 7px;
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
 
     text-transform: uppercase;
+
+    opacity: 0.55;
 }
 
-.logo span {
-    display: block;
-
-    margin-top: -2px;
-
-    font-family: monospace;
-
-    font-size: 9px;
-
-    letter-spacing: 2px;
-
-    color: #9c9589;
-}
-
-/* =========================================
-   SYSTEM STATUS
-   ========================================= */
-
-.system-status {
-    position: absolute;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
+.site-nav {
     display: flex;
-
-    align-items: center;
-
-    gap: 9px;
-
-    white-space: nowrap;
-
-    font-family: monospace;
-
-    font-size: 10px;
-
-    letter-spacing: 2px;
-
-    color: #aaa69d;
+    gap: 30px;
 }
 
-.status-dot {
-    flex-shrink: 0;
-
-    width: 6px;
-    height: 6px;
-
-    border-radius: 50%;
-
-    background: #c98b52;
-
-    box-shadow:
-        0 0 6px #c98b52,
-        0 0 15px rgba(201,139,82,0.5);
-
-    animation: statusPulse 2s infinite;
-}
-
-/* =========================================
-   NAVIGATION
-   ========================================= */
-
-nav {
-    display: flex;
-
-    gap: 25px;
-}
-
-nav a {
+.site-nav a {
     position: relative;
-
-    color: #aaa69d;
 
     text-decoration: none;
 
     font-family: monospace;
 
-    font-size: 11px;
+    font-size: 10px;
 
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
 
     text-transform: uppercase;
 
-    transition: 0.3s;
+    opacity: 0.65;
+
+    transition:
+        opacity 0.3s ease;
 }
 
-nav a::before {
+.site-nav a::after {
     content: "";
 
     position: absolute;
 
     left: 0;
-    bottom: -7px;
+    bottom: -6px;
 
     width: 0;
     height: 1px;
 
-    background: #c98b52;
+    background: #211710;
 
-    transition: 0.3s;
+    transition:
+        width 0.3s ease;
 }
 
-nav a:hover {
-    color: #ffffff;
+.site-nav a:hover {
+    opacity: 1;
 }
 
-nav a:hover::before {
+.site-nav a:hover::after {
     width: 100%;
 }
 
-/* =========================================
-   HERO
-   ========================================= */
+.header-mark {
+    display: flex;
 
-.hero {
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    border:
+        1px solid rgba(33, 23, 16, 0.25);
+
+    border-radius: 50%;
+
+    font-size: 15px;
+
+    transform: rotate(8deg);
+
+    transition:
+        transform 0.4s ease;
+}
+
+.header-mark:hover {
+    transform:
+        rotate(-12deg)
+        scale(1.08);
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero-v2 {
     position: relative;
 
-    min-height: 92vh;
+    min-height:
+        calc(100vh - 95px);
+
+    padding:
+        12vh
+        9vw
+        10vh;
 
     display: flex;
 
-    flex-direction: column;
-
-    justify-content: center;
-
-    padding: 100px 10%;
-
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    align-items: center;
 
     overflow: hidden;
+
+    border-bottom:
+        1px solid rgba(33, 23, 16, 0.16);
 }
 
-.hero::after {
+.hero-background-word {
+    position: absolute;
+
+    right: -3vw;
+    bottom: -7vw;
+
+    z-index: 0;
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(150px, 25vw, 400px);
+
+    font-weight: 900;
+
+    line-height: 0.7;
+
+    letter-spacing: -18px;
+
+    color:
+        rgba(80, 49, 30, 0.055);
+
+    pointer-events: none;
+
+    user-select: none;
+
+    transform:
+        rotate(-4deg);
+
+    transition:
+        transform 0.2s ease-out;
+}
+
+.hero-copy {
+    position: relative;
+
+    z-index: 5;
+
+    max-width: 900px;
+}
+
+.hero-kicker {
+    margin-bottom: 30px;
+
+    font-family: monospace;
+
+    font-size: 10px;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+
+    opacity: 0.58;
+}
+
+.hero-copy h1 {
+    font-family: Georgia, serif;
+
+    font-size:
+        clamp(55px, 8vw, 125px);
+
+    font-weight: normal;
+
+    line-height: 0.85;
+
+    letter-spacing: -6px;
+}
+
+.hero-copy h1 span {
+    position: relative;
+
+    font-style: italic;
+}
+
+.hero-copy h1 span::after {
     content: "";
 
     position: absolute;
 
-    width: 450px;
-    height: 450px;
+    left: 3%;
+    right: -3%;
 
-    right: 7%;
-    top: 20%;
+    bottom: -8px;
 
-    border: 1px solid rgba(201,139,82,0.18);
+    height: 7px;
+
+    border-bottom:
+        2px solid #8c5935;
 
     border-radius: 50%;
 
-    box-shadow:
-        0 0 80px rgba(201,139,82,0.05),
-        inset 0 0 80px rgba(201,139,82,0.03);
-
-    animation: rotate 25s linear infinite;
-
-    pointer-events: none;
+    transform: rotate(-1deg);
 }
 
-.eyebrow {
-    font-family: monospace;
-
-    font-size: 11px;
-
-    letter-spacing: 4px;
-
-    color: #c98b52;
-
-    text-transform: uppercase;
-
-    margin-bottom: 25px;
-}
-
-.hero h1 {
-    position: relative;
-
-    z-index: 2;
-
-    max-width: 950px;
+.hero-copy h2 {
+    margin-top: 55px;
 
     font-family: Georgia, serif;
 
-    font-size: clamp(65px, 10vw, 145px);
+    font-size:
+        clamp(50px, 7vw, 105px);
 
     font-weight: normal;
 
@@ -282,435 +408,2208 @@ nav a:hover::before {
 
     letter-spacing: -5px;
 
-    color: #eee9df;
+    color: #6b3e23;
 }
 
-.hero h1::after {
-    content: "_";
+.hero-description {
+    max-width: 430px;
 
-    color: #c98b52;
-
-    animation: blink 1s infinite;
-}
-
-.hero-text {
-    max-width: 550px;
-
-    margin-top: 40px;
-
-    color: #99958c;
+    margin-top: 38px;
 
     font-size: 18px;
+
+    line-height: 1.5;
+
+    opacity: 0.68;
 }
 
-/* =========================================
-   BUTTONS
-   ========================================= */
 
-button {
-    position: relative;
+/* =========================================================
+   HERO NOTE
+   ========================================================= */
 
-    width: fit-content;
+.hero-note {
+    position: absolute;
 
-    margin-top: 35px;
+    z-index: 7;
 
-    padding: 15px 24px;
+    top: 18%;
+    right: 14%;
 
-    background: transparent;
+    font-family: Georgia, serif;
 
-    border: 1px solid #695846;
+    font-size: 14px;
 
-    color: #e9e4d9;
+    font-style: italic;
+
+    color: #80563a;
+
+    transform: rotate(5deg);
+
+    transition:
+        transform 0.25s ease-out;
+}
+
+.scribble-arrow {
+    margin-top: 2px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 40px;
+
+    line-height: 0.8;
+
+    transform:
+        translateX(-12px)
+        rotate(-10deg);
+}
+
+
+/* =========================================================
+   HERO SIDE NOTE
+   ========================================================= */
+
+.hero-side {
+    position: absolute;
+
+    z-index: 5;
+
+    right: 7vw;
+    bottom: 15vh;
+
+    width: 150px;
+
+    transform: rotate(3deg);
+}
+
+.side-line {
+    width: 45px;
+    height: 1px;
+
+    margin-bottom: 15px;
+
+    background: #211710;
+}
+
+.hero-side p {
+    font-family: Georgia, serif;
+
+    font-size: 14px;
+
+    font-style: italic;
+
+    line-height: 1.35;
+
+    opacity: 0.62;
+}
+
+.hero-side span {
+    display: block;
+
+    margin-top: 25px;
 
     font-family: monospace;
 
-    font-size: 11px;
+    font-size: 8px;
 
     letter-spacing: 2px;
 
-    text-transform: uppercase;
-
-    cursor: pointer;
-
-    transition: 0.3s;
-
-    overflow: hidden;
+    opacity: 0.45;
 }
 
-button::before {
+
+/* =========================================================
+   HERO THOUGHT
+   ========================================================= */
+
+.hero-thought {
+    position: absolute;
+
+    z-index: 6;
+
+    left: 10vw;
+    bottom: 7vh;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    transform: rotate(-2deg);
+}
+
+.thought-mark {
+    font-size: 22px;
+
+    color: #8c5935;
+}
+
+.hero-thought p {
+    font-family: Georgia, serif;
+
+    font-size: 13px;
+
+    font-style: italic;
+
+    line-height: 1.35;
+
+    opacity: 0.58;
+}
+
+
+/* =========================================================
+   COFFEE RINGS
+   ========================================================= */
+
+.coffee-ring {
+    position: absolute;
+
+    border:
+        4px solid rgba(91, 53, 31, 0.12);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    transition:
+        margin-top 0.2s linear;
+}
+
+.ring-one {
+    width: 180px;
+    height: 180px;
+
+    right: 17%;
+    top: 17%;
+
+    transform: rotate(12deg);
+}
+
+.ring-one::after {
+    content: "";
+
+    position: absolute;
+
+    width: 125px;
+    height: 125px;
+
+    top: 25px;
+    left: 25px;
+
+    border:
+        1px solid rgba(91, 53, 31, 0.09);
+
+    border-radius: 50%;
+}
+
+.ring-two {
+    width: 90px;
+    height: 90px;
+
+    right: 7%;
+    top: 48%;
+
+    border-width: 3px;
+
+    opacity: 0.7;
+
+    transform: rotate(-8deg);
+}
+
+
+/* =========================================================
+   JOURNEY
+   ========================================================= */
+
+.journey-section {
+    position: relative;
+
+    min-height: 100vh;
+
+    padding:
+        13vh
+        10vw
+        15vh;
+
+    background: #f2e8d7;
+
+    border-bottom:
+        1px solid rgba(33, 23, 16, 0.16);
+}
+
+.section-number {
+    position: absolute;
+
+    top: 70px;
+    left: 5vw;
+
+    font-family: monospace;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    opacity: 0.4;
+
+    transition:
+        transform 0.2s ease-out;
+}
+
+.section-label {
+    margin-left: 5vw;
+
+    font-family: monospace;
+
+    font-size: 10px;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+
+    opacity: 0.48;
+}
+
+.journey-heading {
+    position: relative;
+
+    margin-top: 50px;
+    margin-left: 5vw;
+}
+
+.journey-heading h2 {
+    font-family: Georgia, serif;
+
+    font-size:
+        clamp(60px, 9vw, 140px);
+
+    font-weight: normal;
+
+    line-height: 0.83;
+
+    letter-spacing: -7px;
+}
+
+.hand-note {
+    position: absolute;
+
+    left: 50%;
+    top: 30%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    font-family: Georgia, serif;
+
+    font-size: 14px;
+
+    font-style: italic;
+
+    color: #855a3b;
+
+    transform: rotate(-5deg);
+}
+
+.hand-note strong {
+    font-family: Arial, sans-serif;
+
+    font-size: 38px;
+
+    font-weight: normal;
+}
+
+.journey-content {
+    display: grid;
+
+    grid-template-columns:
+        1.2fr 1fr 1fr;
+
+    gap: 7vw;
+
+    max-width: 1050px;
+
+    margin:
+        100px
+        0
+        0
+        5vw;
+
+    align-items: start;
+}
+
+.journey-content p {
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    opacity: 0.68;
+}
+
+.journey-content .big-paragraph {
+    font-family: Georgia, serif;
+
+    font-size: 27px;
+
+    line-height: 1.2;
+
+    color: #59331f;
+
+    opacity: 1;
+}
+
+
+/* =========================================================
+   NOTEBOOK SCRAPS
+   ========================================================= */
+
+.notebook-scrap {
+    position: absolute;
+
+    padding: 22px;
+
+    width: 190px;
+
+    background: #e4d2b6;
+
+    box-shadow:
+        3px 5px 0 rgba(45, 26, 15, 0.08),
+        0 15px 25px rgba(45, 26, 15, 0.08);
+
+    font-family: Georgia, serif;
+
+    transform: rotate(7deg);
+
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.notebook-scrap:hover {
+    transform:
+        rotate(2deg)
+        translateY(-6px);
+
+    box-shadow:
+        5px 10px 0 rgba(45, 26, 15, 0.08),
+        0 20px 30px rgba(45, 26, 15, 0.1);
+}
+
+.notebook-scrap span {
+    display: block;
+
+    margin-bottom: 13px;
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    opacity: 0.5;
+}
+
+.notebook-scrap p {
+    font-size: 15px;
+
+    line-height: 1.4;
+}
+
+.scrap-one {
+    right: 8vw;
+    top: 32%;
+
+    transform: rotate(7deg);
+}
+
+.scrap-two {
+    right: 18vw;
+    bottom: 10%;
+
+    width: 145px;
+
+    padding: 16px;
+
+    background: #d8c09f;
+
+    transform: rotate(-6deg);
+}
+
+.scrap-two strong {
+    font-size: 13px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   LAB
+   ========================================================= */
+
+.lab-section {
+    position: relative;
+
+    min-height: 100vh;
+
+    padding:
+        13vh
+        10vw
+        15vh;
+
+    background: #d9c5a8;
+
+    border-bottom:
+        1px solid rgba(33, 23, 16, 0.18);
+}
+
+.lab-section .section-label {
+    color: #4c2c1b;
+}
+
+.lab-intro {
+    margin:
+        55px
+        0
+        80px
+        5vw;
+
+    display: flex;
+
+    align-items: end;
+
+    justify-content: space-between;
+
+    max-width: 1050px;
+}
+
+.lab-intro h2 {
+    font-family: Georgia, serif;
+
+    font-size:
+        clamp(60px, 8vw, 115px);
+
+    font-weight: normal;
+
+    line-height: 0.84;
+
+    letter-spacing: -6px;
+
+    color: #3c2114;
+}
+
+.lab-intro p {
+    max-width: 260px;
+
+    font-family: Georgia, serif;
+
+    font-size: 17px;
+
+    font-style: italic;
+
+    line-height: 1.4;
+
+    opacity: 0.65;
+}
+
+
+/* =========================================================
+   EXPERIMENT CARD
+   ========================================================= */
+
+.experiment-card {
+    position: relative;
+
+    max-width: 920px;
+
+    margin-left: 5vw;
+
+    padding: 35px;
+
+    background: #f0e3ce;
+
+    border:
+        1px solid rgba(45, 26, 15, 0.25);
+
+    box-shadow:
+        10px 12px 0 rgba(77, 43, 23, 0.12);
+
+    transform: rotate(-1deg);
+
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.experiment-card:hover {
+    transform:
+        rotate(0deg)
+        translateY(-5px);
+
+    box-shadow:
+        13px 18px 0 rgba(77, 43, 23, 0.12);
+}
+
+.experiment-top {
+    display: flex;
+
+    justify-content: space-between;
+
+    padding-bottom: 18px;
+
+    border-bottom:
+        1px dashed rgba(45, 26, 15, 0.25);
+
+    font-family: monospace;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+.experiment-top strong {
+    font-weight: normal;
+
+    color: #7d492b;
+}
+
+.experiment-body {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 50px;
+
+    padding: 50px 0;
+}
+
+.experiment-title span {
+    font-family: monospace;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    opacity: 0.5;
+}
+
+.experiment-title h3 {
+    margin-top: 15px;
+
+    font-family: Georgia, serif;
+
+    font-size:
+        clamp(38px, 5vw, 65px);
+
+    font-weight: normal;
+
+    line-height: 0.9;
+
+    letter-spacing: -3px;
+}
+
+.experiment-details {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 20px 55px;
+
+    align-self: center;
+}
+
+.experiment-details div {
+    min-width: 70px;
+}
+
+.experiment-details span {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    opacity: 0.5;
+}
+
+.experiment-details strong {
+    font-family: Georgia, serif;
+
+    font-size: 25px;
+
+    font-weight: normal;
+
+    color: #6b3d22;
+}
+
+.experiment-result {
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+    padding-top: 20px;
+
+    border-top:
+        1px dashed rgba(45, 26, 15, 0.25);
+}
+
+.experiment-result span {
+    font-family: monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    opacity: 0.5;
+}
+
+.experiment-result p {
+    font-family: Georgia, serif;
+
+    font-style: italic;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   LAB NOTE
+   ========================================================= */
+
+.lab-note {
+    position: absolute;
+
+    right: 7vw;
+    bottom: 10%;
+
+    width: 210px;
+
+    font-family: Georgia, serif;
+
+    transform: rotate(4deg);
+}
+
+.lab-note span {
+    font-family: monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 1.5px;
+
+    opacity: 0.5;
+}
+
+.lab-note p {
+    margin-top: 10px;
+
+    font-size: 14px;
+
+    font-style: italic;
+
+    color: #704329;
+}
+
+
+/* =========================================================
+   JOURNAL
+   ========================================================= */
+
+.journal-section {
+    position: relative;
+
+    min-height: 100vh;
+
+    padding:
+        13vh
+        10vw
+        15vh;
+
+    background: #eee3d0;
+
+    border-bottom:
+        1px solid rgba(33, 23, 16, 0.16);
+}
+
+.journal-heading {
+    display: flex;
+
+    align-items: end;
+
+    justify-content: space-between;
+
+    margin:
+        55px
+        0
+        80px
+        5vw;
+
+    max-width: 1050px;
+}
+
+.journal-heading h2 {
+    font-family: Georgia, serif;
+
+    font-size:
+        clamp(55px, 8vw, 110px);
+
+    font-weight: normal;
+
+    line-height: 0.84;
+
+    letter-spacing: -6px;
+}
+
+.journal-heading p {
+    width: 220px;
+
+    font-family: Georgia, serif;
+
+    font-size: 15px;
+
+    font-style: italic;
+
+    line-height: 1.4;
+
+    opacity: 0.58;
+}
+
+
+/* =========================================================
+   JOURNAL CARDS
+   ========================================================= */
+
+.journal-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 30px;
+
+    max-width: 1050px;
+
+    margin-left: 5vw;
+}
+
+.journal-card {
+    position: relative;
+
+    min-height: 330px;
+
+    padding: 35px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    background: #f5ead8;
+
+    border:
+        1px solid rgba(33, 23, 16, 0.15);
+
+    box-shadow:
+        5px 7px 0 rgba(65, 38, 21, 0.07);
+
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease;
+}
+
+.journal-card:hover {
+    transform:
+        translateY(-8px)
+        rotate(1deg);
+
+    box-shadow:
+        7px 13px 0 rgba(65, 38, 21, 0.1);
+}
+
+.journal-card.tilted {
+    transform:
+        rotate(3deg)
+        translateY(15px);
+}
+
+.journal-card.tilted:hover {
+    transform:
+        rotate(1deg)
+        translateY(5px);
+}
+
+.journal-card > span {
+    font-family: monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    opacity: 0.45;
+}
+
+.journal-card h3 {
+    margin-top: auto;
+
+    margin-bottom: 18px;
+
+    font-family: Georgia, serif;
+
+    font-size: 31px;
+
+    font-weight: normal;
+
+    line-height: 1;
+
+    letter-spacing: -1px;
+
+    color: #56311e;
+}
+
+.journal-card p {
+    max-width: 220px;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    opacity: 0.6;
+}
+
+.card-arrow {
+    position: absolute;
+
+    right: 25px;
+    bottom: 20px;
+
+    font-size: 25px;
+
+    opacity: 0.45;
+
+    transition:
+        transform 0.3s ease;
+}
+
+.journal-card:hover .card-arrow {
+    transform:
+        translate(5px, -5px);
+}
+
+
+/* =========================================================
+   DREAM
+   ========================================================= */
+
+.dream-section {
+    position: relative;
+
+    min-height: 100vh;
+
+    padding:
+        15vh
+        10vw;
+
+    overflow: hidden;
+
+    background: #342015;
+
+    color: #eee0ca;
+}
+
+.dream-section .section-label {
+    color: #c8a989;
+}
+
+.dream-background {
+    position: absolute;
+
+    right: -5vw;
+    bottom: -5vw;
+
+    font-family: Arial, sans-serif;
+
+    font-size:
+        clamp(150px, 28vw, 420px);
+
+    font-weight: 900;
+
+    line-height: 0.7;
+
+    letter-spacing: -20px;
+
+    color:
+        rgba(236, 218, 190, 0.035);
+
+    transform:
+        rotate(-6deg);
+
+    transition:
+        transform 0.2s ease-out;
+}
+
+.dream-content {
+    position: relative;
+
+    z-index: 3;
+
+    margin:
+        90px
+        0
+        0
+        5vw;
+
+    max-width: 700px;
+}
+
+.dream-kicker {
+    margin-bottom: 25px;
+
+    font-family: monospace;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    color: #b99370;
+}
+
+.dream-content h2 {
+    font-family: Georgia, serif;
+
+    font-size:
+        clamp(65px, 9vw, 135px);
+
+    font-weight: normal;
+
+    line-height: 0.82;
+
+    letter-spacing: -7px;
+
+    color: #f0dfc5;
+}
+
+.dream-content > p:not(.dream-kicker) {
+    max-width: 520px;
+
+    margin-top: 35px;
+
+    font-family: Georgia, serif;
+
+    font-size: 18px;
+
+    line-height: 1.55;
+
+    color: #cbb49a;
+}
+
+.dream-signature {
+    margin-top: 45px;
+
+    font-family: Georgia, serif;
+
+    font-size: 24px;
+
+    font-style: italic;
+
+    color: #d3b99b;
+
+    transform: rotate(-5deg);
+}
+
+
+/* =========================================================
+   DREAM — ROUGH CAFE SKETCH
+   ========================================================= */
+
+.dream-sketch {
+    position: absolute;
+
+    z-index: 4;
+
+    right: 9vw;
+    top: 35%;
+
+    width: 310px;
+
+    padding: 25px;
+
+    border:
+        1px solid rgba(234, 214, 188, 0.35);
+
+    transform: rotate(4deg);
+
+    transition:
+        transform 0.4s ease;
+}
+
+.dream-sketch:hover {
+    transform:
+        rotate(1deg)
+        translateY(-6px);
+}
+
+.sketch-label {
+    margin-bottom: 25px;
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    color: #c3a88a;
+}
+
+.sketch-cafe {
+    position: relative;
+
+    width: 255px;
+    height: 190px;
+
+    border:
+        2px solid #c9ad8f;
+}
+
+.sketch-roof {
+    position: absolute;
+
+    top: -35px;
+    left: -15px;
+
+    width: 280px;
+    height: 50px;
+
+    border-top:
+        2px solid #c9ad8f;
+
+    transform:
+        rotate(-8deg)
+        skewX(-25deg);
+}
+
+.sketch-window {
+    position: absolute;
+
+    left: 25px;
+    bottom: 35px;
+
+    width: 65px;
+    height: 75px;
+
+    border:
+        2px solid #c9ad8f;
+}
+
+.sketch-window::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: 0;
+
+    width: 1px;
+    height: 100%;
+
+    background: #c9ad8f;
+}
+
+.sketch-window.second {
+    left: 105px;
+}
+
+.sketch-door {
+    position: absolute;
+
+    right: 25px;
+    bottom: 0;
+
+    width: 55px;
+    height: 125px;
+
+    border:
+        2px solid #c9ad8f;
+
+    border-bottom: 0;
+}
+
+.sketch-sign {
+    position: absolute;
+
+    left: 50%;
+    top: 28px;
+
+    transform:
+        translateX(-50%)
+        rotate(-2deg);
+
+    font-family: Georgia, serif;
+
+    font-size: 15px;
+
+    letter-spacing: 2px;
+
+    white-space: nowrap;
+}
+
+.dream-sketch > p {
+    margin-top: 20px;
+
+    font-family: Georgia, serif;
+
+    font-size: 11px;
+
+    font-style: italic;
+
+    color: #a98e72;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.site-footer {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr 1fr;
+
+    gap: 20px;
+
+    padding:
+        35px
+        6vw;
+
+    background: #21140e;
+
+    color: #bca58c;
+
+    font-family: monospace;
+
+    font-size: 8px;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+}
+
+.site-footer div:nth-child(2) {
+    text-align: center;
+}
+
+.site-footer div:last-child {
+    text-align: right;
+}
+
+
+/* =========================================================
+   COFFEE INTRO
+   ========================================================= */
+
+#coffee-intro {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            #3a2518 0%,
+            #211710 35%,
+            #120d09 75%
+        );
+
+    overflow: hidden;
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.2s cubic-bezier(.77, 0, .18, 1);
+}
+
+#coffee-intro::before {
     content: "";
 
     position: absolute;
 
     inset: 0;
 
-    background: #c98b52;
+    opacity: 0.08;
 
-    transform: translateX(-100%);
+    background-image:
+        radial-gradient(
+            rgba(255,255,255,0.7) 0.5px,
+            transparent 0.5px
+        );
 
-    transition: 0.3s;
+    background-size: 5px 5px;
 
-    z-index: -1;
+    pointer-events: none;
 }
 
-button:hover {
-    color: #090a0b;
-
-    border-color: #c98b52;
-}
-
-button:hover::before {
-    transform: translateX(0);
-}
-
-/* =========================================
-   GENERAL SECTIONS
-   ========================================= */
-
-.section {
-    position: relative;
-
-    padding: 130px 10%;
-
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-
-.section::before {
-    content: "";
-
+.intro-note {
     position: absolute;
 
-    left: 0;
-    top: 0;
-
-    width: 3px;
-    height: 100px;
-
-    background: linear-gradient(
-        to bottom,
-        #c98b52,
-        transparent
-    );
-}
-
-.section h2 {
-    max-width: 900px;
-
-    margin-bottom: 30px;
+    top: 9%;
+    left: 9%;
 
     font-family: Georgia, serif;
 
-    font-size: clamp(45px, 6vw, 85px);
+    font-size: 15px;
 
-    font-weight: normal;
+    font-style: italic;
 
-    line-height: 0.95;
+    color: #c9ad8e;
 
-    letter-spacing: -3px;
+    transform: rotate(-5deg);
 
-    color: #eee9df;
+    animation:
+        noteFloat 3s ease-in-out infinite;
 }
 
-.section > p:not(.eyebrow) {
-    max-width: 620px;
+.intro-note::before {
+    content: "↘";
 
-    color: #99958c;
+    position: absolute;
 
-    font-size: 17px;
+    left: -28px;
+    top: 5px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 22px;
+
+    color: #a8794e;
 }
 
-/* =========================================
-   COFFEE LAB
-   ========================================= */
+.coffee-scene {
+    position: absolute;
 
-#lab {
+    left: 50%;
+    top: 50%;
+
+    width: 280px;
+    height: 280px;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-3deg);
+
+    animation:
+        sceneAppear 1.5s ease forwards;
+}
+
+.saucer {
+    position: absolute;
+
+    width: 225px;
+    height: 35px;
+
+    left: 28px;
+    bottom: 32px;
+
+    border-radius: 50%;
+
+    background: #d9c2a2;
+
+    box-shadow:
+        0 15px 25px rgba(0,0,0,0.35);
+
+    transform: scaleX(0);
+
+    animation:
+        saucerAppear 1s ease 0.4s forwards;
+}
+
+.cup {
+    position: absolute;
+
+    left: 52px;
+    bottom: 48px;
+
+    width: 175px;
+    height: 150px;
+
+    z-index: 2;
+
+    transform:
+        translateY(100px)
+        rotate(2deg);
+
+    animation:
+        cupAppear 1.4s cubic-bezier(.2,.8,.2,1) 0.5s forwards;
+}
+
+.cup-body {
+    position: absolute;
+
+    width: 170px;
+    height: 125px;
+
+    left: 0;
+    bottom: 0;
+
     background:
         linear-gradient(
-            135deg,
-            rgba(201,139,82,0.04),
-            transparent 40%
+            100deg,
+            #ead8bd,
+            #c7a984
         );
+
+    border-radius:
+        10px
+        10px
+        48px
+        48px;
+
+    box-shadow:
+        inset -10px -10px 20px rgba(80,45,20,0.15),
+        0 15px 30px rgba(0,0,0,0.25);
 }
 
-#labMessage {
-    position: relative;
+.coffee {
+    position: absolute;
 
-    max-width: 700px;
+    width: 165px;
+    height: 40px;
 
-    margin-top: 45px;
+    left: 3px;
+    top: -12px;
 
-    padding: 30px;
+    border-radius: 50%;
 
-    background: rgba(255,255,255,0.025);
+    background:
+        radial-gradient(
+            ellipse at center,
+            #70401f 0%,
+            #482514 55%,
+            #29150d 100%
+        );
 
-    border: 1px solid rgba(201,139,82,0.25);
+    border:
+        5px solid #d9c2a2;
+
+    z-index: 4;
+
+    overflow: hidden;
+}
+
+.coffee-swirl {
+    position: absolute;
+
+    width: 80px;
+    height: 22px;
+
+    left: 38px;
+    top: 5px;
+
+    border-top:
+        2px solid rgba(214,168,116,0.5);
+
+    border-radius: 50%;
+
+    transform:
+        rotate(-10deg);
+
+    animation:
+        coffeeSwirl 2.5s ease-in-out infinite;
+}
+
+.cup-handle {
+    position: absolute;
+
+    width: 55px;
+    height: 65px;
+
+    right: -42px;
+    top: 25px;
+
+    border:
+        15px solid #d5bc9b;
+
+    border-left: 0;
+
+    border-radius:
+        0
+        40px
+        40px
+        0;
+
+    z-index: 1;
+}
+
+.steam {
+    position: absolute;
+
+    bottom: 175px;
+
+    width: 4px;
+    height: 70px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(240,224,201,0.15);
+
+    filter: blur(4px);
+
+    opacity: 0;
+
+    transform-origin:
+        bottom center;
+}
+
+.steam-1 {
+    left: 105px;
+
+    animation:
+        steam 3.5s ease-in-out 1.7s infinite;
+}
+
+.steam-2 {
+    left: 140px;
+
+    animation:
+        steam 3.5s ease-in-out 2.1s infinite;
+}
+
+.steam-3 {
+    left: 165px;
+
+    animation:
+        steam 3.5s ease-in-out 1.9s infinite;
+}
+
+.intro-text {
+    position: absolute;
+
+    left: 8%;
+    bottom: 9%;
+
+    animation:
+        textAppear 1s ease 1.4s both;
+}
+
+.tiny-label {
+    margin-bottom: 10px;
 
     font-family: monospace;
 
-    color: #b9b4aa;
+    font-size: 10px;
 
-    box-shadow:
-        0 0 40px rgba(201,139,82,0.04);
+    letter-spacing: 4px;
+
+    color: #a8794e;
 }
 
-#labMessage::before {
-    content: "●  EXPERIMENT DATA";
+.intro-title {
+    font-family: Georgia, serif;
 
-    display: block;
+    font-size:
+        clamp(45px, 7vw, 90px);
 
-    margin-bottom: 20px;
+    line-height: 0.85;
 
-    color: #c98b52;
+    letter-spacing: -4px;
+
+    color: #f1e3ce;
+}
+
+.intro-status {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-top: 24px;
+
+    font-family: monospace;
 
     font-size: 10px;
 
     letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    color: #9e8972;
 }
 
-#labMessage h3 {
-    margin-bottom: 15px;
+.status-dot {
+    width: 6px;
+    height: 6px;
 
-    color: #eee9df;
+    border-radius: 50%;
 
-    font-family: Arial, sans-serif;
+    background: #c58c58;
 
-    font-size: 20px;
+    animation:
+        pulse 1.5s infinite;
 }
 
-#labMessage p {
-    margin-top: 12px;
-}
-
-/* =========================================
-   CREATIONS
-   ========================================= */
-
-#creations {
-    background: #0c0d0f;
-}
-
-#creations::after {
-    content: "001 / 002 / 003";
-
+.intro-corner {
     position: absolute;
 
-    right: 10%;
-    top: 130px;
-
-    color: #393633;
-
-    font-family: monospace;
-
-    font-size: 12px;
-
-    letter-spacing: 4px;
-}
-
-/* =========================================
-   JOURNAL
-   ========================================= */
-
-#journal {
-    background:
-        radial-gradient(
-            circle at 80% 50%,
-            rgba(201,139,82,0.06),
-            transparent 30%
-        );
-}
-
-/* =========================================
-   WANKU'S KART
-   ========================================= */
-
-.kart {
-    min-height: 70vh;
+    right: 7%;
+    bottom: 8%;
 
     display: flex;
 
     flex-direction: column;
 
-    justify-content: center;
-
-    background:
-        linear-gradient(
-            135deg,
-            #12100e,
-            #080909
-        );
-
-    overflow: hidden;
-}
-
-.kart::after {
-    content: "WANKU'S KART";
-
-    position: absolute;
-
-    right: -100px;
-    bottom: -80px;
-
-    font-family: Arial, sans-serif;
-
-    font-size: 130px;
-
-    font-weight: bold;
-
-    color: rgba(255,255,255,0.025);
-
-    white-space: nowrap;
-}
-
-.kart h2 {
-    color: #e4c09d;
-}
-
-.kart p:not(.eyebrow) {
-    color: #aaa096;
-}
-
-/* =========================================
-   ABOUT
-   ========================================= */
-
-#about {
-    min-height: 65vh;
-}
-
-#about h2 {
-    max-width: 700px;
-}
-
-/* =========================================
-   FOOTER
-   ========================================= */
-
-footer {
-    display: flex;
-
-    justify-content: space-between;
-
-    padding: 45px 6%;
-
-    border-top: 1px solid rgba(255,255,255,0.08);
-
-    color: #66625c;
+    gap: 8px;
 
     font-family: monospace;
 
-    font-size: 10px;
+    font-size: 9px;
 
-    letter-spacing: 1px;
+    letter-spacing: 2px;
 
-    text-transform: uppercase;
+    color: #725e4c;
 }
 
-/* =========================================
-   ANIMATIONS
-   ========================================= */
+#coffee-intro.leave {
+    opacity: 0;
 
-@keyframes rotate {
+    transform: scale(1.04);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   CHAOS EASTER EGG
+   ========================================================= */
+
+.coffee-chaos {
+    animation:
+        tinyShake 0.12s linear 8;
+}
+
+.coffee-chaos .hero-background-word {
+    transform:
+        rotate(-7deg)
+        scale(1.05);
+}
+
+.coffee-chaos .coffee-ring {
+    transform:
+        rotate(25deg)
+        scale(1.08);
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes cupAppear {
+
+    to {
+        transform:
+            translateY(0)
+            rotate(2deg);
+    }
+}
+
+@keyframes saucerAppear {
+
+    to {
+        transform:
+            scaleX(1);
+    }
+}
+
+@keyframes sceneAppear {
+
     from {
-        transform: rotate(0deg);
+        opacity: 0;
+
+        transform:
+            translate(-50%, -45%)
+            rotate(-8deg)
+            scale(0.92);
     }
 
     to {
-        transform: rotate(360deg);
+        opacity: 1;
+
+        transform:
+            translate(-50%, -50%)
+            rotate(-3deg)
+            scale(1);
     }
 }
 
-@keyframes blink {
-    0%, 45% {
-        opacity: 1;
-    }
+@keyframes steam {
 
-    46%, 100% {
+    0% {
         opacity: 0;
-    }
-}
 
-@keyframes statusPulse {
-    0%, 100% {
-        opacity: 1;
-        transform: scale(1);
+        transform:
+            translateY(0)
+            translateX(0)
+            scaleX(1);
+    }
+
+    25% {
+        opacity: 0.45;
     }
 
     50% {
-        opacity: 0.35;
-        transform: scale(0.7);
+        transform:
+            translateY(-35px)
+            translateX(12px)
+            scaleX(2);
+    }
+
+    75% {
+        opacity: 0.15;
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translateY(-75px)
+            translateX(-8px)
+            scaleX(0.5);
     }
 }
 
-/* =========================================
-   MOBILE
-   ========================================= */
+@keyframes coffeeSwirl {
 
-@media (max-width: 800px) {
-
-    header {
-        align-items: flex-start;
-
-        flex-direction: column;
-
-        gap: 20px;
+    0%,
+    100% {
+        transform:
+            translateX(-5px)
+            rotate(-10deg);
     }
 
-    .system-status {
-        position: static;
+    50% {
+        transform:
+            translateX(15px)
+            rotate(5deg);
+    }
+}
 
-        transform: none;
+@keyframes pulse {
 
-        margin-top: -5px;
-
-        order: 2;
+    0%,
+    100% {
+        opacity: 1;
     }
 
-    nav {
-        flex-wrap: wrap;
+    50% {
+        opacity: 0.3;
+    }
+}
 
-        gap: 14px;
+@keyframes textAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(20px);
     }
 
-    .hero {
-        min-height: 80vh;
+    to {
+        opacity: 1;
 
-        padding: 80px 7%;
+        transform:
+            translateY(0);
+    }
+}
+
+@keyframes noteFloat {
+
+    0%,
+    100% {
+        transform:
+            rotate(-5deg)
+            translateY(0);
     }
 
-    .hero h1 {
-        font-size: 65px;
+    50% {
+        transform:
+            rotate(-3deg)
+            translateY(-5px);
+    }
+}
 
-        letter-spacing: -3px;
+@keyframes tinyShake {
+
+    0% {
+        transform: translate(0);
     }
 
-    .hero::after {
-        width: 250px;
-        height: 250px;
-
-        right: -100px;
+    25% {
+        transform: translate(1px, -1px);
     }
 
-    .section {
-        padding: 90px 7%;
+    50% {
+        transform: translate(-1px, 1px);
     }
 
-    .section h2 {
-        font-size: 50px;
+    75% {
+        transform: translate(1px, 1px);
     }
 
-    #creations::after {
+    100% {
+        transform: translate(0);
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .site-header {
+        padding: 24px 5vw;
+    }
+
+    .site-nav {
+        gap: 16px;
+    }
+
+    .hero-v2 {
+        padding-left: 7vw;
+        padding-right: 7vw;
+    }
+
+    .hero-note {
+        right: 8%;
+    }
+
+    .hero-side {
         display: none;
     }
 
-    .kart::after {
-        font-size: 60px;
-
-        right: -50px;
+    .journey-content {
+        grid-template-columns:
+            1fr 1fr;
     }
 
-    footer {
+    .notebook-scrap {
+        display: none;
+    }
+
+    .lab-intro {
+        align-items: start;
+
         flex-direction: column;
 
-        gap: 15px;
+        gap: 35px;
+    }
+
+    .dream-sketch {
+        opacity: 0.45;
+
+        right: 4vw;
+    }
+
+    .journal-grid {
+        gap: 18px;
+    }
+
+    .journal-card {
+        padding: 25px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    .site-header {
+        padding: 20px 6vw;
+
+        gap: 18px;
+
+        flex-wrap: wrap;
+    }
+
+    .site-logo {
+        font-size: 19px;
+    }
+
+    .header-mark {
+        width: 32px;
+        height: 32px;
+    }
+
+    .site-nav {
+        order: 3;
+
+        width: 100%;
+
+        justify-content: space-between;
+
+        gap: 8px;
+    }
+
+    .site-nav a {
+        font-size: 8px;
+
+        letter-spacing: 1px;
+    }
+
+
+    /* HERO */
+
+    .hero-v2 {
+        min-height:
+            calc(100vh - 120px);
+
+        padding:
+            80px
+            7vw
+            100px;
+    }
+
+    .hero-copy h1 {
+        font-size: 58px;
+
+        letter-spacing: -4px;
+    }
+
+    .hero-copy h2 {
+        margin-top: 40px;
+
+        font-size: 55px;
+
+        letter-spacing: -4px;
+    }
+
+    .hero-description {
+        font-size: 16px;
+
+        max-width: 300px;
+    }
+
+    .hero-note {
+        top: 10%;
+        right: 8%;
+
+        font-size: 11px;
+    }
+
+    .scribble-arrow {
+        font-size: 30px;
+    }
+
+    .hero-thought {
+        left: 8vw;
+        bottom: 4vh;
+    }
+
+    .hero-background-word {
+        font-size: 140px;
+
+        letter-spacing: -10px;
+    }
+
+    .coffee-ring {
+        opacity: 0.55;
+    }
+
+    .ring-one {
+        width: 130px;
+        height: 130px;
+
+        right: -20px;
+        top: 22%;
+    }
+
+
+    /* SECTIONS */
+
+    .journey-section,
+    .lab-section,
+    .journal-section,
+    .dream-section {
+        padding:
+            90px
+            7vw
+            110px;
+    }
+
+    .section-number {
+        position: static;
+
+        margin-bottom: 20px;
+    }
+
+    .section-label {
+        margin-left: 0;
+    }
+
+
+    /* JOURNEY */
+
+    .journey-heading {
+        margin-left: 0;
+
+        margin-top: 45px;
+    }
+
+    .journey-heading h2 {
+        font-size: 62px;
+
+        letter-spacing: -4px;
+    }
+
+    .hand-note {
+        position: relative;
+
+        left: auto;
+        top: auto;
+
+        margin-top: 35px;
+
+        justify-content: flex-end;
+    }
+
+    .journey-content {
+        display: block;
+
+        margin:
+            65px
+            0
+            0;
+    }
+
+    .journey-content p {
+        margin-bottom: 30px;
+    }
+
+    .journey-content .big-paragraph {
+        font-size: 25px;
+    }
+
+
+    /* LAB */
+
+    .lab-intro {
+        margin:
+            45px
+            0
+            60px;
+    }
+
+    .lab-intro h2 {
+        font-size: 62px;
+
+        letter-spacing: -4px;
+    }
+
+    .experiment-card {
+        margin-left: 0;
+
+        padding: 24px;
+
+        transform:
+            rotate(-0.5deg);
+    }
+
+    .experiment-body {
+        display: block;
+
+        padding: 35px 0;
+    }
+
+    .experiment-title h3 {
+        font-size: 45px;
+    }
+
+    .experiment-details {
+        margin-top: 40px;
+
+        gap: 25px;
+    }
+
+    .lab-note {
+        position: relative;
+
+        right: auto;
+        bottom: auto;
+
+        margin:
+            60px
+            0
+            0
+            auto;
+    }
+
+
+    /* JOURNAL */
+
+    .journal-heading {
+        display: block;
+
+        margin:
+            45px
+            0
+            65px;
+    }
+
+    .journal-heading h2 {
+        font-size: 60px;
+
+        letter-spacing: -4px;
+    }
+
+    .journal-heading p {
+        margin-top: 35px;
+    }
+
+    .journal-grid {
+        display: block;
+
+        margin-left: 0;
+    }
+
+    .journal-card {
+        min-height: 280px;
+
+        margin-bottom: 30px;
+    }
+
+    .journal-card.tilted {
+        transform:
+            rotate(1deg);
+    }
+
+
+    /* DREAM */
+
+    .dream-content {
+        margin-left: 0;
+
+        margin-top: 65px;
+    }
+
+    .dream-content h2 {
+        font-size: 65px;
+
+        letter-spacing: -4px;
+    }
+
+    .dream-content > p:not(.dream-kicker) {
+        font-size: 16px;
+    }
+
+    .dream-sketch {
+        position: relative;
+
+        top: auto;
+        right: auto;
+
+        width: 100%;
+
+        margin:
+            80px
+            0
+            0;
+
+        opacity: 0.85;
+    }
+
+    .sketch-cafe {
+        max-width: 100%;
+    }
+
+
+    /* FOOTER */
+
+    .site-footer {
+        display: block;
+
+        padding: 30px 7vw;
+    }
+
+    .site-footer div {
+        margin-bottom: 12px;
+    }
+
+    .site-footer div:nth-child(2),
+    .site-footer div:last-child {
+        text-align: left;
+    }
+
+
+    /* INTRO */
+
+    .intro-note {
+        top: 7%;
+        left: 8%;
+    }
+
+    .coffee-scene {
+        transform:
+            translate(-50%, -50%)
+            scale(0.8)
+            rotate(-3deg);
+    }
+
+    .intro-text {
+        left: 8%;
+        bottom: 10%;
+    }
+
+    .intro-title {
+        font-size: 52px;
+    }
+
+    .intro-corner {
+        display: none;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        scroll-behavior: auto !important;
+
+        transition-duration: 0.01ms !important;
+    }
+
+    .scroll-reveal {
+        opacity: 1;
+
+        transform: none;
     }
 }
